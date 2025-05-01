@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
-RUN apt-get update && apt-get install -y openssh-server sudo vim python3.10-venv
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y \
+    openssh-server sudo vim python3-venv python3-pip \
+    && apt-get clean
 RUN useradd -m -d /home/ctf -s /bin/bash ctf && echo "ctf:123" | chpasswd
 RUN echo "ctf ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/ctf

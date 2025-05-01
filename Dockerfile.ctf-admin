@@ -1,6 +1,9 @@
 FROM ubuntu:20.04
-RUN apt-get update && apt-get install -y openssh-client sshpass ansible sudo vim make python3.10-venv
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y \
+    openssh-client sshpass ansible sudo vim make python3-venv python3-pip \
+    && apt-get clean
 RUN useradd -m -d /home/ctf-admin -s /bin/bash ctf-admin && echo "ctf-admin:123" | chpasswd
 RUN echo "ctf-admin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-WORKDIR /home/ctf-admin
+RUN pip3 install requestsWORKDIR /home/ctf-admin
 CMD tail -f /dev/null

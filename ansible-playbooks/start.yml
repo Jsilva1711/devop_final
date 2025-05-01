@@ -1,13 +1,18 @@
 - name: Set up servers
   hosts: ctf_servers
   tasks:
-    - name: Run start.sh in services/A
+    - name: Run start.sh in services/ssh
       ansible.builtin.shell: |
-        cd /home/ctf/services/A && bash -x start.sh
+        cd /home/ctf/services/ssh && bash -x start.sh
       args:
         chdir: /home/ctf
-    - name: Run start.sh in services/B
+    - name: Run start.sh in services/web
       ansible.builtin.shell: |
-        cd /home/ctf/services/B && bash -x start.sh
+        cd /home/ctf/services/web && bash -x start.sh
+      args:
+        chdir: /home/ctf
+    - name: Run start.sh in services/app
+      ansible.builtin.shell: |
+        cd /home/ctf/services/app && bash -x start.sh
       args:
         chdir: /home/ctf

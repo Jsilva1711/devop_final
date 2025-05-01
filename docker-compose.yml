@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   ctf-admin:
     build:
@@ -7,23 +7,33 @@ services:
     container_name: ctf-admin
     volumes:
       - ./ansible-playbooks:/ansible-playbooks
-    command: tail -f /dev/null
+    networks:
+      - ctf-network
+    command: ["tail", "-f", "/dev/null"]
 
   red-team:
     build:
       context: .
       dockerfile: Dockerfile.ctf
     container_name: red-team
+    networks:
+      - ctf-network
     ports:
-      - "5000:22"
-      - "5001:22"
+      - "6000:22"
+      - "6001:5000"
+      - "6002:5001"
 
   fuchsia-team:
     build:
       context: .
       dockerfile: Dockerfile.ctf
     container_name: fuchsia-team
+    networks:
+      - ctf-network
     ports:
-      - "5010:22"
-      - "5011:22"
+      - "6010:22"
+      - "6011:5000"
+      - "6012:5001"
 
+networks:
+  ctf-network:

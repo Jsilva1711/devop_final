@@ -1,4 +1,10 @@
 #!/bin/bash
 echo "Starting service B..."
-cd /home/ctf/services/service-B
-FLASK_APP=app.py flask run --host=0.0.0.0 --port=5000
+cd "$(dirname "$0")" || exit
+
+source ./env/bin/activate
+
+pip install -r requirements.txt
+
+python app.py
+

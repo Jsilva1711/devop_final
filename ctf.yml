@@ -1,0 +1,8 @@
+ctf:
+  rounds: 5
+  teams:
+    - red-team
+    - fuchsia-team
+  services:
+    - A
+    - B

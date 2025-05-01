@@ -1,0 +1,13 @@
+- name: Stop services
+  hosts: ctf_servers
+  tasks:
+    - name: Run stop.sh in services/A
+      ansible.builtin.shell: |
+        cd /home/ctf/services/A && ./stop.sh
+      args:
+        chdir: /home/ctf
+    - name: Run stop.sh in services/B
+      ansible.builtin.shell: |
+        cd /home/ctf/services/B && ./stop.sh
+      args:
+        chdir: /home/ctf

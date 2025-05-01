@@ -1,0 +1,29 @@
+version: "2"
+services:
+  ctf-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.ctf-admin
+    container_name: ctf-admin
+    volumes:
+      - ./ansible-playbooks:/ansible-playbooks
+    command: tail -f /dev/null
+
+  red-team:
+    build:
+      context: .
+      dockerfile: Dockerfile.ctf
+    container_name: red-team
+    ports:
+      - "5000:22"
+      - "5001:22"
+
+  fuchsia-team:
+    build:
+      context: .
+      dockerfile: Dockerfile.ctf
+    container_name: fuchsia-team
+    ports:
+      - "5010:22"
+      - "5011:22"
+
